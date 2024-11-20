@@ -1,0 +1,22 @@
+databases:
+  - name: proyecto_inmobiliaria    
+    plan: free
+    databaseName: proyecto_inmobiliaria
+    user: postgres
+
+services:
+  - type: web
+    plan: free
+    name: proyecto_inmobiliaria
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn proyecto_inmobiliaria.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: proyecto_inmobiliaria
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

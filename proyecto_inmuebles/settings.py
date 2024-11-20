@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+import dj_database_url
+
 
 # Cargar las variables de entorno desde el archivo .env
 from pathlib import Path
@@ -80,15 +83,9 @@ WSGI_APPLICATION = "proyecto_inmuebles.wsgi.application"
 load_dotenv()
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DB_ENGINE"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
+
 
 
 # Password validation
