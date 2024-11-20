@@ -1,1 +1,1 @@
-web: gunicorn proyecto_inmobiliaria.wsgi
+web: gunicorn proyecto_inmuebles.wsgi
